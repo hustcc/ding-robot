@@ -16,7 +16,7 @@ robot.markdown('测试 markdown', '# ding-robot\n\n' +
   '## 使用\n\n' +
   '> npm i -S ding-robot\n\n' +
   '```js\n' +
-  'var DR = require(\'ding-robot\');\n' +
+  'var DingRobot = require(\'ding-robot\');\n' +
   'var robot = new DingRobot(token);\n\n' +
   'robot.text(\'你好，hustcc！\');' +
   '```'

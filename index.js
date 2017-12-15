@@ -3,10 +3,10 @@
  * Contract: i@hust.cc
  */
 
-var https = require('https');
+var sender = require('dingtalk-robot');
 
 function DingRobot (accessToken, cb) {
-  this.accessToken = accessToken;
+  this.robot = sender(accessToken);
   this.cb = cb || function () {};
 
   this.atUsers = [];
@@ -26,58 +26,8 @@ DingRobot.prototype._send = function (data) {
   // reset
   this.reset();
 
-  var self = this;
+  this.robot.send(data, this.cb); // send by http
 
-  var postData = JSON.stringify(data);
-  var options = {
-    hostname: 'oapi.dingtalk.com',
-    port: 443,
-    path: '/robot/send?access_token=' + this.accessToken,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  };
-  var request = https.request(options, function(response) {
-    var data = [];
-    var count = 0;
-    response.setEncoding('utf8');
-
-    response.on('data', function(chunk) {
-      data.push(chunk);
-      count += chunk.length;
-    });
-
-    response.on('end', function() {
-      var buffer;
-      var length = data.length;
-
-      if (length === 0) {
-        buffer = new Buffer(0);
-      } else if (length === 1) {
-        buffer = data[0];
-      } else {
-        buffer = new Buffer(count);
-        for (var index = 0, position = 0; index < length; index++) {
-          var chunk = data[index];
-          chunk.copy(buffer, position);
-          position += chunk.length;
-        }
-      }
-
-      var datastring = buffer.toString();
-      var result = JSON.parse(datastring);
-      if (result.errcode) {
-        return self.cb(new Error(result.errmsg));
-      }
-
-      return self.cb(null, result);
-    });
-  });
-  request.on('error', self.cb);
-
-  request.write(postData);
-  request.end();
   return this;
 };
 

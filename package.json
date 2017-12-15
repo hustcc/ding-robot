@@ -18,5 +18,8 @@
     "ding-robot"
   ],
   "author": "ProtoTeam",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dingtalk-robot": "^1.0.3"
+  }
 }
