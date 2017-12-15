@@ -1,0 +1,22 @@
+{
+  "name": "ding-robot",
+  "version": "1.0.0",
+  "description": "Ding talk robot message send api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github/com/ProtoTeam/ding-robot"
+  },
+  "keywords": [
+    "dingding",
+    "dingtalk",
+    "robot",
+    "api",
+    "ding-robot"
+  ],
+  "author": "ProtoTeam",
+  "license": "MIT"
+}
