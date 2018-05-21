@@ -5,7 +5,7 @@
 
 var DingRobot = require('./');
 
-var robot = new DingRobot('cad1a0e0fa14cc69bca7e4ce84893f298cbf695af59a91b3cce408be9ed29567');
+const robot = new DingRobot('5201ea837c39307372b15de3e17bd9abb211edb34e3ad8e0e5d5aacbc3ee94a9');
 
 // text
 robot.text('你好，hustcc！');
@@ -30,3 +30,27 @@ robot.at('13276109876').text('你好，hustcc！');
 
 // @ all
 robot.atAll(true).text('大家好！我是 ding-robot！');
+
+// single button ActionCard
+// robot.actionCard('title', `
+// # Test Action Card
+//
+// - markdown list item
+//
+// > comment
+//
+// [link](http://baidu.com)
+// `, { title: 'single title', actionURL: 'https://www.baidu.com'})
+
+
+// ActionCard
+robot.actionCard('title', `
+# Test Action Card
+
+- markdown list item
+
+> comment
+`, [
+  { title: 'btn 1', actionURL: 'https://www.baidu.com'},
+  { title: 'btn 2', actionURL: 'https://map.baidu.com'}
+], { btnOrientation: 0, hideAvatar: 1 });

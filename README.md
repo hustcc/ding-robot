@@ -43,13 +43,25 @@ robot.at('13276109876').text('你好，hustcc！');
 // robot.atAll(true)
 // robot.atAll(false)
 robot.atAll(true).text('大家好！我是 ding-robot！');
+
+// ActionCard
+robot.actionCard('title', `
+# Test Action Card
+
+- markdown list item
+
+> comment
+`, [
+  { title: 'btn 1', actionURL: 'https://www.baidu.com'},
+  { title: 'btn 2', actionURL: 'https://map.baidu.com'}
+], { btnOrientation: 0, hideAvatar: 1 });
+
 ```
 
 
 ## TODO
 
  - FeedCard
- - ActionCard
 
 
 ## LICENSE
