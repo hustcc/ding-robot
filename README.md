@@ -56,12 +56,30 @@ robot.actionCard('title', `
   { title: 'btn 2', actionURL: 'https://map.baidu.com'}
 ], { btnOrientation: 0, hideAvatar: 1 });
 
+// FeedCard
+robot.feedCard({
+  title: 'FeedCard',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+})
+
+robot.feedCard([{
+  title: 'FeedCard 1',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}])
 ```
 
 
 ## TODO
-
- - FeedCard
 
 
 ## LICENSE

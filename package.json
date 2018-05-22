@@ -1,6 +1,6 @@
 {
   "name": "ding-robot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ding talk robot message send api.",
   "main": "dist/index.js",
   "scripts": {

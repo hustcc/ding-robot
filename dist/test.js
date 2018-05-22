@@ -25,6 +25,7 @@ robot.at('13276109876').text('你好，hustcc！');
 robot.atAll(true).text('大家好！我是 ding-robot！');
 
 // single button ActionCard
+
 // robot.actionCard('title', `
 // # Test Action Card
 //
@@ -34,8 +35,26 @@ robot.atAll(true).text('大家好！我是 ding-robot！');
 //
 // [link](http://baidu.com)
 // `, { title: 'single title', actionURL: 'https://www.baidu.com'})
+robot.actionCard('title', '\n# Test Action Card\n\n- markdown list item\n\n> comment\n', [{ title: 'btn 1', actionURL: 'https://www.alipay.com/' }, { title: 'btn 2', actionURL: 'https://www.alipay.com/' }], { btnOrientation: 0, hideAvatar: 1 });
 
+// FeedCard
+robot.feedCard({
+  title: 'FeedCard',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+});
 
-// ActionCard
-robot.actionCard('title', '\n# Test Action Card\n\n- markdown list item\n\n> comment\n', [{ title: 'btn 1', actionURL: 'https://www.baidu.com' }, { title: 'btn 2', actionURL: 'https://map.baidu.com' }], { btnOrientation: 0, hideAvatar: 1 });
+robot.feedCard([{
+  title: 'FeedCard 1',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}]);
 //# sourceMappingURL=test.js.map

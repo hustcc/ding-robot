@@ -122,6 +122,23 @@ DingRobot.prototype.actionCard = function (title, text, btn = [], options = {}) 
 };
 
 /**
+ *
+ * @param links  Array<{ title: string,        单条信息文本
+ *                       messageURL: string,   点击单条信息到跳转链接
+ *                       picURL: string        单条信息后面图片的URL
+ *                     }>
+ */
+DingRobot.prototype.feedCard = function (links = []) {
+  const _links = Array.isArray(links) ? links : [links]
+  this._send({
+    msgtype: 'feedCard',
+    feedCard: {
+      links: _links
+    }
+  })
+}
+
+/**
  * @ 所有人
  * @param isAtAll
  */
