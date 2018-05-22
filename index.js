@@ -3,7 +3,7 @@
  * Contract: i@hust.cc
  */
 
-var sender = require('dingtalk-robot');
+import sender from 'dingtalk-robot';
 
 function DingRobot (accessToken, cb) {
   this.robot = sender(accessToken);
@@ -24,10 +24,18 @@ DingRobot.prototype.reset = function () {
 
 DingRobot.prototype._send = function (data) {
   // reset
+  const shouldAt = data.msgtype === 'text' || data.msgtype === 'markdown';
+  const at = shouldAt ? {
+    at: {
+      atMobiles: this.atUsers,
+      isAtAll: this.isAtAll
+    }
+  } : {}
+  const _data = {
+    ...data, ...at
+  }
+  this.robot.send(_data, this.cb); // send by http
   this.reset();
-
-  this.robot.send(data, this.cb); // send by http
-
   return this;
 };
 
@@ -40,10 +48,6 @@ DingRobot.prototype.text = function (msg) {
     msgtype: 'text',
     text: {
       content: msg
-    },
-    at: {
-      atMobiles: this.atUsers,
-      isAtAll: this.isAtAll
     }
   });
 };
@@ -60,10 +64,6 @@ DingRobot.prototype.markdown = function (title, md) {
     markdown: {
       title: title,
       text: md
-    },
-    at: {
-      atMobiles: this.atUsers,
-      isAtAll: this.isAtAll
     }
   });
 };
@@ -98,6 +98,47 @@ DingRobot.prototype.at = function (userIds) {
 };
 
 /**
+ * 发送 ActionCard 消息
+ * @param title 首屏会话透出的展示内容
+ * @param text  markdown格式的消息
+ * @param btn   按钮(组): { title: string, actionURL: string } 或 Array<{title: string, actionURL: string }>
+ * @param options 消息样式 { btnOrientation: '0' || '1' 0-按钮竖直排列，1-按钮横向排列,  hideAvatar: '0' || '1' 0-正常发消息者头像,1-隐藏发消息者头像 }
+ */
+DingRobot.prototype.actionCard = function (title, text, btn = [], options = {}) {
+  const { btnOrientation = '0', hideAvatar = '0' } = options
+  let actionCard = {
+    title,
+    text,
+    btnOrientation: `${btnOrientation}`,
+    hideAvatar: `${hideAvatar}`
+  };
+  const btns = Array.isArray(btn) ? btn : [btn];
+  if (btns.length === 1) {
+    actionCard = { ...actionCard, singleTitle: btn.title, singleURL: btn.actionURL };
+  } else {
+    actionCard = { ...actionCard, btns: btns };
+  }
+  this._send({ msgtype: 'actionCard', actionCard });
+};
+
+/**
+ *
+ * @param links  Array<{ title: string,        单条信息文本
+ *                       messageURL: string,   点击单条信息到跳转链接
+ *                       picURL: string        单条信息后面图片的URL
+ *                     }>
+ */
+DingRobot.prototype.feedCard = function (links = []) {
+  const _links = Array.isArray(links) ? links : [links]
+  this._send({
+    msgtype: 'feedCard',
+    feedCard: {
+      links: _links
+    }
+  })
+}
+
+/**
  * @ 所有人
  * @param isAtAll
  */
@@ -106,4 +147,4 @@ DingRobot.prototype.atAll = function (isAtAll) {
   return this;
 };
 
-module.exports = DingRobot;
+module.exports = DingRobot

@@ -43,13 +43,43 @@ robot.at('13276109876').text('你好，hustcc！');
 // robot.atAll(true)
 // robot.atAll(false)
 robot.atAll(true).text('大家好！我是 ding-robot！');
+
+// ActionCard
+robot.actionCard('title', `
+# Test Action Card
+
+- markdown list item
+
+> comment
+`, [
+  { title: 'btn 1', actionURL: 'https://www.baidu.com'},
+  { title: 'btn 2', actionURL: 'https://map.baidu.com'}
+], { btnOrientation: 0, hideAvatar: 1 });
+
+// FeedCard
+robot.feedCard({
+  title: 'FeedCard',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+})
+
+robot.feedCard([{
+  title: 'FeedCard 1',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}, {
+  title: 'FeedCard 2',
+  messageURL: 'https://www.alipay.com/',
+  picURL: 'https://t.alipayobjects.com/images/T1HHFgXXVeXXXXXXXX.png'
+}])
 ```
 
 
 ## TODO
-
- - FeedCard
- - ActionCard
 
 
 ## LICENSE
